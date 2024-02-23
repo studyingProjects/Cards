@@ -41,7 +41,6 @@ class CircleShape: CAShapeLayer, ShapeLayerProtocol {
         self.path = path.cgPath
         // изменяем цвет
         self.fillColor = fillColor
-        
     }
     
     required init?(coder: NSCoder) {
@@ -50,8 +49,8 @@ class CircleShape: CAShapeLayer, ShapeLayerProtocol {
         
 }
 
-
 class SquareShape: CAShapeLayer, ShapeLayerProtocol {
+    
     required init(size: CGSize, fillColor: CGColor) {
         super.init()
         // сторона равна меньшей из сторон
