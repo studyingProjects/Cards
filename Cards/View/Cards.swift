@@ -12,7 +12,7 @@ protocol FlippableView: UIView {
     var flipCompletionHandler: ((FlippableView) -> Void)? { get set }
     func flip()
 }
-
+// MARK: - Generic class CardView
 class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
     
     var isFlipped: Bool = false {
@@ -54,6 +54,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         anchorDefaultPoint.x = touches.first!.location(in: window).x - frame.minX
         anchorDefaultPoint.y = touches.first!.location(in: window).y - frame.minY
@@ -63,8 +64,24 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.frame.origin.x = touches.first!.location(in: window).x - anchorDefaultPoint.x
-        self.frame.origin.y = touches.first!.location(in: window).y - anchorDefaultPoint.y
+        
+        let newPointMinX = touches.first!.location(in: window).x - anchorDefaultPoint.x
+        let newPointMinY = touches.first!.location(in: window).y - anchorDefaultPoint.y
+        let newPointMaxX = newPointMinX + bounds.width
+        let newPointMaxY = newPointMinY + bounds.height
+        
+        let superViewWidth = superview?.bounds.width ?? 0
+        let superViewHeight = superview?.bounds.height ?? 0
+        
+        if newPointMinX < 0
+            || newPointMinY < 0
+            || newPointMaxX > superViewWidth
+            || newPointMaxY > superViewHeight {
+            return
+        }
+        
+        self.frame.origin.x = newPointMinX
+        self.frame.origin.y = newPointMinY
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -105,7 +122,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.black.cgColor
     }
-    
+    // MARK: -  Flip
     func flip() {
         // определяем, между какими представлениями осуществить переход
         let fromView = isFlipped ? frontSideView : backSideView
@@ -118,7 +135,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         })
         isFlipped.toggle() //isFlipped = !isFlipped
     }
-    
+    // MARK: - Front/Back Side Views
     // возвращает представление для лицевой стороны карточки
     private func getFrontSideView() -> UIView {
         let view = UIView(frame: self.bounds)

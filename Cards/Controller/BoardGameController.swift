@@ -8,15 +8,21 @@
 import UIKit
 
 class BoardGameController: UIViewController {
-    // MARK: - Properties
-    // количество пар уникальных карточек
-    var cardsPairsCounts = 8
-    // сущность "Игра"
-    lazy var game: Game = getNewGame()
+    // MARK: - View-Poperties
     // кнопка для запуска/перезапуска игры
-    lazy var startButtonView = getStartButtonView()
+    private lazy var startButtonView = getStartButtonView()
     // игровое поле
-    lazy var boardGameView = getBoardGameView()
+    private lazy var boardGameView = getBoardGameView()
+    
+    // MARK: - Game settings
+    // количество пар уникальных карточек
+    private var cardsPairsCounts = 8
+    
+    // игральные карточки
+    private var cardViews = [UIView]()
+    private var flippedCards = [UIView]()
+    // сущность "Игра"
+    private lazy var game: Game = getNewGame()
     // размеры карточек
     private var cardSize: CGSize {
         CGSize(width: 80, height: 120)
@@ -28,9 +34,6 @@ class BoardGameController: UIViewController {
     private var cardMaxYCoordinate: Int {
         Int(boardGameView.frame.height - cardSize.height)
     }
-    // игральные карточки
-    var cardViews = [UIView]()
-    private var flippedCards = [UIView]()
     
     // MARK: - LifeCycle
     override func loadView() {
@@ -58,7 +61,7 @@ class BoardGameController: UIViewController {
         game.generateCards()
         return game
     }
-    
+    // MARK: - Start button View
     private func getStartButtonView() -> UIButton {
         // 1
         // Создаем кнопку
@@ -92,7 +95,7 @@ class BoardGameController: UIViewController {
         
         return button
     }
-    
+    // MARK: - Board game View
     private func getBoardGameView() -> UIView {
         // отступ игрового поля от ближайших элементов
         let margin: CGFloat = 10
@@ -184,10 +187,9 @@ class BoardGameController: UIViewController {
             }
         }
         
-        
         return cardViews
     }
-    
+    // MARK: - Cards placing
     private func placeCardsOnBoard(_ cards: [UIView]) {
         // удаляем все имеющиеся на игровом поле карточки
         for card in cardViews {

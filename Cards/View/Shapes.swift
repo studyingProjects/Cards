@@ -17,7 +17,7 @@ extension ShapeLayerProtocol {
     }
 }
 
-// MARK: - Back side
+// MARK: - Back side Circle
 class BackSideCircle: CAShapeLayer, ShapeLayerProtocol {
     required init(size: CGSize, fillColor: CGColor) {
         super.init()
@@ -47,7 +47,7 @@ class BackSideCircle: CAShapeLayer, ShapeLayerProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+// MARK: - Back side Line
 class BackSideLine: CAShapeLayer, ShapeLayerProtocol {
     required init(size: CGSize, fillColor: CGColor) {
         super.init()
@@ -77,7 +77,7 @@ class BackSideLine: CAShapeLayer, ShapeLayerProtocol {
     }
 }
 
-// MARK: - Front side
+// MARK: - Front side FillShape(rect)
 class FillShape: CAShapeLayer, ShapeLayerProtocol {
     required init(size: CGSize, fillColor: CGColor) {
         super.init()
@@ -90,7 +90,7 @@ class FillShape: CAShapeLayer, ShapeLayerProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+// MARK: - Front side CrossShape
 class CrossShape: CAShapeLayer, ShapeLayerProtocol {
     required init(size: CGSize, fillColor: CGColor) {
         super.init()
@@ -110,7 +110,7 @@ class CrossShape: CAShapeLayer, ShapeLayerProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+// MARK: - Front side Circle
 class CircleShape: CAShapeLayer, ShapeLayerProtocol {
     
     required init(size: CGSize, fillColor: CGColor) {
@@ -140,7 +140,7 @@ class CircleShape: CAShapeLayer, ShapeLayerProtocol {
     }
         
 }
-
+// MARK: - Front side Square
 class SquareShape: CAShapeLayer, ShapeLayerProtocol {
     required init(size: CGSize, fillColor: CGColor) {
         super.init()
