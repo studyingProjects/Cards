@@ -9,6 +9,7 @@ import UIKit
 
 protocol FlippableView: UIView {
     var isFlipped: Bool { get set }
+    var handleFlip: Bool { get set }
     var flipCompletionHandler: ((FlippableView) -> Void)? { get set }
     func flip()
 }
@@ -20,6 +21,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
             self.setNeedsDisplay()
         }
     }
+    var handleFlip: Bool = true
     // цвет фигуры
     var color: UIColor!
     var flipCompletionHandler: ((FlippableView) -> Void)?
@@ -97,6 +99,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
 //            }
 //        }
         if self.frame.origin == startTouchPoint {
+            handleFlip = true
             flip()
         }
     }

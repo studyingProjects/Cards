@@ -11,6 +11,7 @@ class BoardGameController: UIViewController {
     // MARK: - View-Poperties
     // кнопка для запуска/перезапуска игры
     private lazy var startButtonView = getStartButtonView()
+    private lazy var flipAllButtonView = getFlipAllButton()
     // игровое поле
     private lazy var boardGameView = getBoardGameView()
     
@@ -40,6 +41,7 @@ class BoardGameController: UIViewController {
         super.loadView()
         // добавляем кнопку на сцену
         view.addSubview(startButtonView)
+        view.addSubview(flipAllButtonView)
         // добавляем игровое поле на сцену
         view.addSubview(boardGameView)
     }
@@ -54,6 +56,26 @@ class BoardGameController: UIViewController {
         let cards = getCardsBy(modelData: game.cards)
         placeCardsOnBoard(cards)
     }
+    // MARK: - Flip All Cards
+    @objc func flipAllCards(_ sender: UIButton) {
+        
+//        for card in flippedCards {
+//            (card as! FlippableView).isFlipped.toggle()
+//        }
+//        flippedCards = []
+        
+        for card in cardViews {
+            if flippedCards.contains(card) {
+                continue
+            }
+            let flippableCard = card as! FlippableView
+            flippableCard.handleFlip = false
+            flippableCard.flip()
+        }
+        
+        flippedCards = []
+    }
+    
     // MARK: - Private methods
     private func getNewGame() -> Game {
         let game = Game()
@@ -68,7 +90,7 @@ class BoardGameController: UIViewController {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         // 2
         // Изменяем положение кнопки
-        button.center.x = view.center.x
+        //button.center.x = view.center.x
         // получаем доступ к текущему окну
         //let window = UIApplication.shared.windows[0]
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -76,7 +98,9 @@ class BoardGameController: UIViewController {
         else { return button}
         // определяем отступ сверху от границ окна до Safe Area
         let topPadding = window.safeAreaInsets.top
+        let leftPadding = 10.0
         button.frame.origin.y = topPadding
+        button.frame.origin.x = leftPadding
         // 3
         // Настраиваем внешний вид кнопки
         // устанавливаем текст
@@ -92,6 +116,30 @@ class BoardGameController: UIViewController {
         
         // подключаем обработчик нажатия на кнопку
         button.addTarget(nil, action: #selector(startGame(_:)), for: .touchUpInside)
+        
+        return button
+    }
+    // MARK: - Flip All Button View
+    func getFlipAllButton() -> UIButton {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+                return button
+              }
+        
+        let topPadding = window.safeAreaInsets.top
+        let sidePadding = 10.0
+        
+        button.frame.origin.x = view.frame.width - sidePadding - button.bounds.width
+        button.frame.origin.y = topPadding
+        
+        button.setTitle("Перевернуть карты", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.gray, for: .highlighted)
+        button.backgroundColor = .systemGray4
+        button.layer.cornerRadius = 10
+        
+        button.addTarget(nil, action: #selector(flipAllCards(_:)), for: .touchUpInside)
         
         return button
     }
@@ -143,6 +191,11 @@ class BoardGameController: UIViewController {
         // добавляем всем картам обработчик переворота
         for card in cardViews {
             (card as! FlippableView).flipCompletionHandler = { flippedCard in
+                
+                if !flippedCard.handleFlip {
+                    return
+                }
+                
                 // переносим карточку вверх иерархии
                 flippedCard.superview?.bringSubviewToFront(flippedCard)
                 
@@ -181,9 +234,7 @@ class BoardGameController: UIViewController {
                         }
                     }
                 }
-                
-                
-                
+                 
             }
         }
         
