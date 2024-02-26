@@ -8,8 +8,10 @@
 import UIKit
 
 class MainScreenView: UIView {
+    
     // MARK: - Properties
-    lazy var startGameButton: UIButton = {
+    var delegate: MainScreenViewDelegate?
+    private lazy var startGameButton: UIButton = {
         
         //        guard let windowsScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
         //              let window = windowsScene.windows.first else {
@@ -28,6 +30,8 @@ class MainScreenView: UIView {
         button.setTitleColor(.systemGray4, for: .highlighted)
         button.backgroundColor = .systemGray5
         button.layer.cornerRadius = 10
+        
+        button.addTarget(self, action: #selector(startNewGame(_:)), for: .touchUpInside)
         
         return button
         
@@ -60,4 +64,9 @@ class MainScreenView: UIView {
         startGameButton.frame.origin.y = safeAreaPadding + viewHeight / 5
     }
     
+    @objc func startNewGame(_ sender: UIButton) {
+        delegate?.startNewGame(sender)
+    }
+    
 }
+
