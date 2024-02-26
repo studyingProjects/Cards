@@ -49,6 +49,122 @@ class BoardGameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .systemBackground
+    }
+    // MARK: - WillLayoutSubviews
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let topPadding = view.safeAreaInsets.top
+        let commonPadding = 10.0
+        
+        startButtonView.frame.origin.y = topPadding
+        startButtonView.frame.origin.x = commonPadding
+        
+        flipAllButtonView.frame.origin.y = topPadding
+        flipAllButtonView.frame.origin.x = view.frame.width - commonPadding - flipAllButtonView.bounds.width
+        
+        // указываем координаты
+        // x
+        boardGameView.frame.origin.x = commonPadding
+        // y
+        boardGameView.frame.origin.y = topPadding + startButtonView.frame.height + commonPadding
+        // рассчитываем ширину
+        boardGameView.frame.size.width = view.bounds.width - commonPadding * 2
+        // рассчитываем высоту
+        // c учетом нижнего отступа
+        let bottomPadding = view.safeAreaInsets.bottom
+        boardGameView.frame.size.height = view.bounds.height - boardGameView.frame.origin.y - commonPadding - bottomPadding
+        
+    }
+    
+    // MARK: - Start button View
+    private func getStartButtonView() -> UIButton {
+        // 1
+        // Создаем кнопку
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        // 2
+        // Изменяем положение кнопки
+        //button.center.x = view.center.x
+        // получаем доступ к текущему окну
+        //let window = UIApplication.shared.windows[0]
+//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//              let window = windowScene.windows.first
+//        else { return button}
+        // определяем отступ сверху от границ окна до Safe Area
+        //let topPadding = view.safeAreaInsets.top //window.safeAreaInsets.top
+        //let leftPadding = 10.0
+        //button.frame.origin.y = topPadding
+        //button.frame.origin.x = leftPadding
+        // 3
+        // Настраиваем внешний вид кнопки
+        // устанавливаем текст
+        button.setTitle("Начать игру", for: .normal)
+        // устанавливаем цвет текста для обычного (не нажатого) состояния
+        button.setTitleColor(.black, for: .normal)
+        // устанавливаем цвет текста для нажатого состояния
+        button.setTitleColor(.gray, for: .highlighted)
+        // устанавливаем фоновый цвет
+        button.backgroundColor = .systemGray4
+        // скругляем углы
+        button.layer.cornerRadius = 10
+        
+        // подключаем обработчик нажатия на кнопку
+        button.addTarget(nil, action: #selector(startGame(_:)), for: .touchUpInside)
+        
+        return button
+    }
+    // MARK: - Flip All Button View
+    func getFlipAllButton() -> UIButton {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
+//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//              let window = windowScene.windows.first else {
+//                return button
+//              }
+        
+        //let topPadding = window.safeAreaInsets.top
+        //let sidePadding = 10.0
+        
+//        button.frame.origin.x = view.frame.width - sidePadding - button.bounds.width
+//        button.frame.origin.y = topPadding
+        
+        button.setTitle("Перевернуть карты", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.gray, for: .highlighted)
+        button.backgroundColor = .systemGray4
+        button.layer.cornerRadius = 10
+        
+        button.addTarget(nil, action: #selector(flipAllCards(_:)), for: .touchUpInside)
+        
+        return button
+    }
+    // MARK: - Board game View
+    private func getBoardGameView() -> UIView {
+        // отступ игрового поля от ближайших элементов
+        //let margin: CGFloat = 10
+        let boardView = UIView()
+//        // указываем координаты
+//        // x
+//        boardView.frame.origin.x = margin
+//        // y
+//        //let window = UIApplication.shared.windows[0] / let topPadding = window.safeAreaInsets.top
+//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//              let window = windowScene.windows.first
+//        else { return boardView}
+//        let topPadding = window.safeAreaInsets.top
+//        boardView.frame.origin.y = topPadding + startButtonView.frame.height + margin
+//        // рассчитываем ширину
+//        boardView.frame.size.width = UIScreen.main.bounds.width - margin*2
+//        // рассчитываем высоту
+//        // c учетом нижнего отступа
+//        let bottomPadding = window.safeAreaInsets.bottom
+//        boardView.frame.size.height = UIScreen.main.bounds.height - boardView.frame.origin.y - margin - bottomPadding
+        // изменяем стиль игрового поля
+        boardView.layer.cornerRadius = 5
+        boardView.backgroundColor = UIColor(red: 0.1, green: 0.9, blue: 0.1,
+                                            alpha: 0.3)
+        
+        return boardView
     }
     // MARK: - Events handliers
     @objc func startGame(_ sender: UIButton) {
@@ -82,94 +198,6 @@ class BoardGameController: UIViewController {
         game.cardsCount = self.cardsPairsCounts
         game.generateCards()
         return game
-    }
-    // MARK: - Start button View
-    private func getStartButtonView() -> UIButton {
-        // 1
-        // Создаем кнопку
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        // 2
-        // Изменяем положение кнопки
-        //button.center.x = view.center.x
-        // получаем доступ к текущему окну
-        //let window = UIApplication.shared.windows[0]
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first
-        else { return button}
-        // определяем отступ сверху от границ окна до Safe Area
-        let topPadding = window.safeAreaInsets.top
-        let leftPadding = 10.0
-        button.frame.origin.y = topPadding
-        button.frame.origin.x = leftPadding
-        // 3
-        // Настраиваем внешний вид кнопки
-        // устанавливаем текст
-        button.setTitle("Начать игру", for: .normal)
-        // устанавливаем цвет текста для обычного (не нажатого) состояния
-        button.setTitleColor(.black, for: .normal)
-        // устанавливаем цвет текста для нажатого состояния
-        button.setTitleColor(.gray, for: .highlighted)
-        // устанавливаем фоновый цвет
-        button.backgroundColor = .systemGray4
-        // скругляем углы
-        button.layer.cornerRadius = 10
-        
-        // подключаем обработчик нажатия на кнопку
-        button.addTarget(nil, action: #selector(startGame(_:)), for: .touchUpInside)
-        
-        return button
-    }
-    // MARK: - Flip All Button View
-    func getFlipAllButton() -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 180, height: 50))
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-                return button
-              }
-        
-        let topPadding = window.safeAreaInsets.top
-        let sidePadding = 10.0
-        
-        button.frame.origin.x = view.frame.width - sidePadding - button.bounds.width
-        button.frame.origin.y = topPadding
-        
-        button.setTitle("Перевернуть карты", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.setTitleColor(.gray, for: .highlighted)
-        button.backgroundColor = .systemGray4
-        button.layer.cornerRadius = 10
-        
-        button.addTarget(nil, action: #selector(flipAllCards(_:)), for: .touchUpInside)
-        
-        return button
-    }
-    // MARK: - Board game View
-    private func getBoardGameView() -> UIView {
-        // отступ игрового поля от ближайших элементов
-        let margin: CGFloat = 10
-        let boardView = UIView()
-        // указываем координаты
-        // x
-        boardView.frame.origin.x = margin
-        // y
-        //let window = UIApplication.shared.windows[0] / let topPadding = window.safeAreaInsets.top
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first
-        else { return boardView}
-        let topPadding = window.safeAreaInsets.top
-        boardView.frame.origin.y = topPadding + startButtonView.frame.height + margin
-        // рассчитываем ширину
-        boardView.frame.size.width = UIScreen.main.bounds.width - margin*2
-        // рассчитываем высоту
-        // c учетом нижнего отступа
-        let bottomPadding = window.safeAreaInsets.bottom
-        boardView.frame.size.height = UIScreen.main.bounds.height - boardView.frame.origin.y - margin - bottomPadding
-        // изменяем стиль игрового поля
-        boardView.layer.cornerRadius = 5
-        boardView.backgroundColor = UIColor(red: 0.1, green: 0.9, blue: 0.1,
-                                            alpha: 0.3)
-        
-        return boardView
     }
     // MARK: - Cards managment
     // генерация массива карточек на основе данных Модели
