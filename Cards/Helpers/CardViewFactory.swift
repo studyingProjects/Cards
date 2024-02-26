@@ -24,6 +24,8 @@ class CardViewFactory {
             return CardView<SquareShape>(frame: frame, color: viewColor)
         case .fill:
             return CardView<FillShape>(frame: frame, color: viewColor)
+        case .emptyCircle:
+            return CardView<EmtyCircleShape>(frame: frame, color: viewColor)
         }
     }
     

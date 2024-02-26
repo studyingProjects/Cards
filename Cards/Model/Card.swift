@@ -13,6 +13,7 @@ enum CardType: CaseIterable {
     case cross
     case square
     case fill
+    case emptyCircle
 }
 
 // цвета карт
