@@ -15,7 +15,11 @@ enum CardType: CaseIterable {
     case fill
     case emptyCircle
 }
-
+// типы обложек карт
+enum CardCover {
+    case circle
+    case line
+}
 // цвета карт
 enum CardColor: CaseIterable {
     case red

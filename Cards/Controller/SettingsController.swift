@@ -7,25 +7,44 @@
 
 import UIKit
 
+protocol SettingsViewDelegate {
+    func setCountOfCard(_ newValue: Float)
+}
+
 class SettingsController: UIViewController {
 
-    private var settings: SettingsView!
+    private var settingsView: SettingsView!
+    private var storage: SettingsStorageProtocol!
     var delegate: SettingsControllerDelegate?
     
     override func loadView() {
-        settings = SettingsView()
-        self.view = settings
-        self.delegate = settings
+        settingsView = SettingsView()
+        settingsView.delegate = self
+        self.view = settingsView
+        self.delegate = settingsView
+        storage = SettingsStorage.shared
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loadSettings()
     }
     
     override func viewWillLayoutSubviews() {
         self.delegate?.setViewsSizes()
     }
     
+    private func loadSettings() {
+        self.delegate?.updateNumberOfPairs(with: storage.countOfCardPairs)
+    }
+    
+}
 
+extension SettingsController: SettingsViewDelegate {
+    func setCountOfCard(_ newValue: Float) {
+        storage.countOfCardPairs = newValue
+    }
+    
+    
+    
 }

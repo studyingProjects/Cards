@@ -17,7 +17,7 @@ class BoardGameController: UIViewController {
     
     // MARK: - Game settings
     // количество пар уникальных карточек
-    private var cardsPairsCounts = 8
+    private var cardsPairsCounts = Int(SettingsStorage.shared.countOfCardPairs)
     
     // игральные карточки
     private var cardViews = [UIView]()
