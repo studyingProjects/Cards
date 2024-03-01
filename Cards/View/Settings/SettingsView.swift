@@ -49,11 +49,43 @@ class SettingsView: UIView {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.text = "8"
+        
+        return label
+    }()
+    // MARK: - Card colors section
+    private lazy var cardColorsView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        
+        return view
+    }()
+    
+    private lazy var cardColorsLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.text = "Используемые цвета"
         
         return label
     }()
     
+    private lazy var cardColorsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10.0
+        stackView.distribution = .fillProportionally
+        //stackView.layer.borderWidth = 3.0
+        //stackView.layer.borderColor = UIColor.black.cgColor
+        return stackView
+    }()
+    
+    private lazy var colorViews: [UIView] = {
+        let colorView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        colorView.layer.borderWidth = 3.0
+        colorView.layer.borderColor = UIColor.orange.cgColor
+        return [colorView]
+    }()
     
     // MARK: - Card types section
     private lazy var cardTypesView: UIView = {
@@ -71,15 +103,7 @@ class SettingsView: UIView {
         
         return label
     }()
-    // MARK: - Card colors section
-    private lazy var cardColorsView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        
-        return view
-    }()
-    // MARK: - back side shapes section
+    // MARK: - Back side shapes section
     private lazy var backSideShapesView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -107,12 +131,15 @@ class SettingsView: UIView {
         numberOfPairsView.addSubview(numberOfPairsSlider)
         numberOfPairsView.addSubview(numberOfPairsResultLabel)
         
-        addSubview(cardTypesView)
-        
-        
         addSubview(cardColorsView)
+        cardColorsView.addSubview(cardColorsLabel)
+        cardColorsView.addSubview(cardColorsStackView)
         
         
+
+        
+        addSubview(cardTypesView)
+
         addSubview(backSideShapesView)
     }
     
@@ -142,7 +169,7 @@ extension SettingsView: SettingsControllerDelegate {
         let innerlabelWidth = commonViewWidth - innerViewPadding * 2
         let innerlabelHeight = 25.0
         
-        // Number of pairs
+        // MARK: - Number of Pairs sizes
         numberOfPairsView.frame.size.width = commonViewWidth
         numberOfPairsView.frame.size.height = commonViewHeight
         numberOfPairsView.center.x = self.center.x
@@ -164,24 +191,35 @@ extension SettingsView: SettingsControllerDelegate {
         numberOfPairsResultLabel.center.x = centerNumberOfPairsView.x
         numberOfPairsResultLabel.frame.origin.y = innerViewPadding * 3 + numberOfPairsSlider.frame.height + numberOfPairsLabel.frame.height
         
-        
-        // Card types
-        cardTypesView.frame.size.width = commonViewWidth
-        cardTypesView.frame.size.height = commonViewHeight
-        cardTypesView.center.x = self.center.x
-        cardTypesView.frame.origin.y = numberOfPairsView.frame.maxY + commonPadding
-        
-        // Card colors
+        // MARK: - Card colors sizes
         cardColorsView.frame.size.width = commonViewWidth
         cardColorsView.frame.size.height = commonViewHeight
         cardColorsView.center.x = self.center.x
-        cardColorsView.frame.origin.y = cardTypesView.frame.maxY + commonPadding
+        cardColorsView.frame.origin.y = numberOfPairsView.frame.maxY + commonPadding
         
-        // Back side shapes
+        cardColorsLabel.frame.size.width = innerlabelWidth
+        cardColorsLabel.frame.size.height = innerlabelHeight
+        cardColorsLabel.center = cardColorsView.convert(cardColorsView.center, from: self)
+        cardColorsLabel.frame.origin.y = innerViewPadding
+        
+        cardColorsStackView.frame.size.width = innerlabelWidth
+        cardColorsStackView.frame.size.height = innerlabelHeight * 2
+        cardColorsStackView.center = cardColorsLabel.center
+        cardColorsStackView.frame.origin.y = cardColorsLabel.frame.maxY + innerViewPadding
+        
+        //colorView.backgroundColor = .blue
+        
+        // MARK: - Card types sizes
+        cardTypesView.frame.size.width = commonViewWidth
+        cardTypesView.frame.size.height = commonViewHeight
+        cardTypesView.center.x = self.center.x
+        cardTypesView.frame.origin.y = cardColorsView.frame.maxY + commonPadding
+        
+        // MARK: - Back side shapes sizes
         backSideShapesView.frame.size.width = commonViewWidth
         backSideShapesView.frame.size.height = commonViewHeight
         backSideShapesView.center.x = self.center.x
-        backSideShapesView.frame.origin.y = cardColorsView.frame.maxY + commonPadding
+        backSideShapesView.frame.origin.y = cardTypesView.frame.maxY + commonPadding
     }
     // MARK: - Update through settings
     func updateNumberOfPairs(with value: Float) {

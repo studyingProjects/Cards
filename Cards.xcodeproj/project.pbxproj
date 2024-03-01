@@ -12,6 +12,7 @@
 		6C43E0432B85FC6800B8498B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C43E0422B85FC6800B8498B /* SceneDelegate.swift */; };
 		6C43E04A2B85FC6900B8498B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C43E0492B85FC6900B8498B /* Assets.xcassets */; };
 		6C43E04D2B85FC6900B8498B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C43E04B2B85FC6900B8498B /* LaunchScreen.storyboard */; };
+		6C44AE6B2B91DB5800356DF6 /* SettingsChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C44AE6A2B91DB5800356DF6 /* SettingsChoiceView.swift */; };
 		6C6F60942B8C8EA100219EDF /* MainScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F60932B8C8EA100219EDF /* MainScreenController.swift */; };
 		6C6F60982B8C93E100219EDF /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F60972B8C93E100219EDF /* MainScreen.swift */; };
 		6C70FD972B8E18F4005A9D4B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C70FD962B8E18F4005A9D4B /* Settings.swift */; };
@@ -33,6 +34,7 @@
 		6C43E04C2B85FC6900B8498B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C43E04E2B85FC6900B8498B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C43E0542B85FCB400B8498B /* ViewExperiments.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ViewExperiments.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		6C44AE6A2B91DB5800356DF6 /* SettingsChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsChoiceView.swift; sourceTree = "<group>"; };
 		6C6F60932B8C8EA100219EDF /* MainScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainScreenController.swift; path = Cards/Controller/MainScreenController.swift; sourceTree = SOURCE_ROOT; };
 		6C6F60972B8C93E100219EDF /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		6C70FD962B8E18F4005A9D4B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -100,6 +102,14 @@
 			path = Cards;
 			sourceTree = "<group>";
 		};
+		6C44AE692B91DB3600356DF6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6C70FD9A2B8E1C67005A9D4B /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		6C7A62FF2B88CD3700FA9F2A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,7 +126,8 @@
 				6C6F60972B8C93E100219EDF /* MainScreen.swift */,
 				6C7A63012B88CD5A00FA9F2A /* Shapes.swift */,
 				6C7A63032B88CD6200FA9F2A /* Cards.swift */,
-				6C70FD9A2B8E1C67005A9D4B /* SettingsView.swift */,
+				6C44AE6A2B91DB5800356DF6 /* SettingsChoiceView.swift */,
+				6C44AE692B91DB3600356DF6 /* Settings */,
 				6C7A63052B88D19800FA9F2A /* Storyboards */,
 			);
 			path = View;
@@ -220,6 +231,7 @@
 				6C43E0412B85FC6800B8498B /* AppDelegate.swift in Sources */,
 				6C39A5892B89ED2A00F0001E /* CardViewFactory.swift in Sources */,
 				6C43E0432B85FC6800B8498B /* SceneDelegate.swift in Sources */,
+				6C44AE6B2B91DB5800356DF6 /* SettingsChoiceView.swift in Sources */,
 				6C70FD9B2B8E1C67005A9D4B /* SettingsView.swift in Sources */,
 				6C70FD972B8E18F4005A9D4B /* Settings.swift in Sources */,
 				6C7A63022B88CD5A00FA9F2A /* Shapes.swift in Sources */,

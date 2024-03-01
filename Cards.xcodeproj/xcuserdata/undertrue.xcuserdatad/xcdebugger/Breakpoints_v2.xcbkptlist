@@ -140,166 +140,10 @@
             filePath = "Cards/View/SettingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "updateSliderLabel(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "23618CB9-F132-4813-B706-3F3A8658122B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cards/Controller/SettingsController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "setCountOfCard(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "23618CB9-F132-4813-B706-3F3A8658122B - 58ce92186046f04d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.SettingsController.setCountOfCard(Swift.Float) -&gt; ()"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/SettingsController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "248">
-               </Location>
-               <Location
-                  uuid = "23618CB9-F132-4813-B706-3F3A8658122B - 58ce92186046f04d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.SettingsController.setCountOfCard(Swift.Float) -&gt; ()"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/SettingsController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cards/Controller/BoardGameController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "BoardGameController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089 - d61714966a7188c9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.BoardGameController.cardViews.getter : Swift.Array&lt;__C.UIView&gt;"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/BoardGameController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089 - f766277dc314da0c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.BoardGameController.cardViews.setter : Swift.Array&lt;__C.UIView&gt;"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/BoardGameController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089 - 3303db80a276e80d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.BoardGameController.cardViews.modify : Swift.Array&lt;__C.UIView&gt;"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/BoardGameController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089 - 155ac11ab585d9da"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.BoardGameController.cardViews.modify : Swift.Array&lt;__C.UIView&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089 - 798614f828d6d077"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.BoardGameController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Cards.BoardGameController"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/BoardGameController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "648">
-               </Location>
-               <Location
-                  uuid = "88DEC2AE-49C1-4764-A0AC-B5F2A4450089 - 3c43501fdd36bfe4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cards.BoardGameController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Cards.BoardGameController&gt;"
-                  moduleName = "Cards"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/undertrue/Developer/Studying/Usov%20UIKit/Cards/Cards/Controller/BoardGameController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "624">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -348,6 +192,22 @@
                   offsetFromSymbolStart = "120">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DA3C3CC-EBC8-4C4C-8D28-7DF20F76635C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cards/Controller/BoardGameController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "startGame(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

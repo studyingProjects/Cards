@@ -53,6 +53,7 @@ class BoardGameController: UIViewController {
     }
     // MARK: - WillLayoutSubviews
     override func viewWillLayoutSubviews() {
+        
         super.viewWillLayoutSubviews()
         
         let topPadding = view.safeAreaInsets.top

@@ -31,6 +31,7 @@ class SettingsController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         self.delegate?.setViewsSizes()
     }
     
