@@ -190,4 +190,27 @@ class EmtyCircleShape: CAShapeLayer, ShapeLayerProtocol {
     }
         
 }
+// MARK: - Check mark
+class CheckMark: CAShapeLayer, ShapeLayerProtocol {
+    required init(size: CGSize, fillColor: CGColor) {
+        super.init()
+        let path = UIBezierPath()
+        let midX = size.width / 2
+        let midY = size.height / 2
+        path.move(to: CGPoint(x: midX / 1.5, y: midY / 1.5))
+        path.addLine(to: CGPoint(x: midX, y: midY))
+        path.addLine(to: CGPoint(x: midX + midX / 4, y: midY / 8))
+        // инициализируем созданный путь
+        self.path = path.cgPath
+        // изменяем цвет
+        self.strokeColor = fillColor
+        self.lineWidth = 3
+        self.fillColor = .none
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
 

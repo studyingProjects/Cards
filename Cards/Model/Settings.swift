@@ -11,6 +11,10 @@ protocol SettingsStorageProtocol {
     var countOfCardPairs: Float { get set }
 }
 
+enum SettingsChoiceViewTypes {
+    
+}
+
 class SettingsStorage: SettingsStorageProtocol {
     static let shared = SettingsStorage()
     private var storage = UserDefaults.standard

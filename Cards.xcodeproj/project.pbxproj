@@ -106,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				6C70FD9A2B8E1C67005A9D4B /* SettingsView.swift */,
+				6C44AE6A2B91DB5800356DF6 /* SettingsChoiceView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -126,7 +127,6 @@
 				6C6F60972B8C93E100219EDF /* MainScreen.swift */,
 				6C7A63012B88CD5A00FA9F2A /* Shapes.swift */,
 				6C7A63032B88CD6200FA9F2A /* Cards.swift */,
-				6C44AE6A2B91DB5800356DF6 /* SettingsChoiceView.swift */,
 				6C44AE692B91DB3600356DF6 /* Settings */,
 				6C7A63052B88D19800FA9F2A /* Storyboards */,
 			);

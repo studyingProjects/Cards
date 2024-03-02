@@ -29,6 +29,24 @@ class CardViewFactory {
         }
     }
     
+    func getSettingsChoiceView(_ shape : CardType, withSize size: CGSize, andColor color: CardColor) -> UIView {
+        let frame = CGRect(origin: .zero, size: size)
+        let viewColor = getViewColorBy(modelColor: color)
+        switch shape {
+        case .circle:
+            return SettingsChoiceView<CircleShape>(frame: frame, color: viewColor)
+        case .cross:
+            return SettingsChoiceView<CrossShape>(frame: frame, color: viewColor)
+        case .square:
+            return SettingsChoiceView<SquareShape>(frame: frame, color: viewColor)
+        case .fill:
+            return SettingsChoiceView<FillShape>(frame: frame, color: viewColor)
+        case .emptyCircle:
+            return SettingsChoiceView<EmtyCircleShape>(frame: frame, color: viewColor)
+        }
+        
+    }
+    
     // преобразуем цвет Модели в цвет Представления
     private func getViewColorBy(modelColor: CardColor) -> UIColor {
         switch modelColor {

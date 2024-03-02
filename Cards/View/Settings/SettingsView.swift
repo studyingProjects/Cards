@@ -11,6 +11,7 @@ import UIKit
 protocol SettingsControllerDelegate {
     func setViewsSizes()
     func updateNumberOfPairs(with value: Float)
+    func updateCardColors(with array: [UIView])
 }
 
 class SettingsView: UIView {
@@ -74,9 +75,8 @@ class SettingsView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10.0
-        stackView.distribution = .fillProportionally
-        //stackView.layer.borderWidth = 3.0
-        //stackView.layer.borderColor = UIColor.black.cgColor
+        stackView.distribution = .fillEqually
+        
         return stackView
     }()
     
@@ -158,6 +158,7 @@ class SettingsView: UIView {
 
 // MARK: - Extensions
 extension SettingsView: SettingsControllerDelegate {
+    
     func setViewsSizes() {
         let commonPadding = 20.0
         let safeAreaTopPadding = self.safeAreaInsets.top
@@ -225,6 +226,12 @@ extension SettingsView: SettingsControllerDelegate {
     func updateNumberOfPairs(with value: Float) {
         numberOfPairsSlider.value = value
         numberOfPairsResultLabel.text = String(format: "%.0f", value)
+    }
+    
+    func updateCardColors(with array: [UIView]) {
+        array.forEach { colorView in
+            cardColorsStackView.addArrangedSubview(colorView)
+        }
     }
     
     
