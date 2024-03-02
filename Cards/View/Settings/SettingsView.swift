@@ -80,12 +80,12 @@ class SettingsView: UIView {
         return stackView
     }()
     
-    private lazy var colorViews: [UIView] = {
-        let colorView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        colorView.layer.borderWidth = 3.0
-        colorView.layer.borderColor = UIColor.orange.cgColor
-        return [colorView]
-    }()
+//    private lazy var colorViews: [UIView] = {
+//        let colorView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+//        colorView.layer.borderWidth = 3.0
+//        colorView.layer.borderColor = UIColor.orange.cgColor
+//        return [colorView]
+//    }()
     
     // MARK: - Card types section
     private lazy var cardTypesView: UIView = {
@@ -96,13 +96,24 @@ class SettingsView: UIView {
         return view
     }()
     
-    private lazy var cardTypeLabel: UILabel = {
+    private lazy var cardTypesLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
+        label.textAlignment = .center
         label.text = "Типы фигур"
         
         return label
     }()
+    
+    private lazy var cardTypesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10.0
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
     // MARK: - Back side shapes section
     private lazy var backSideShapesView: UIView = {
         let view = UIView()
@@ -110,6 +121,24 @@ class SettingsView: UIView {
         view.layer.cornerRadius = 10
         
         return view
+    }()
+    
+    private lazy var backSideShapeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.text = "Обложки карт"
+        
+        return label
+    }()
+    
+    private lazy var backSideShapeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10.0
+        stackView.distribution = .fillEqually
+        
+        return stackView
     }()
     
     // MARK: - Initialization
@@ -135,12 +164,13 @@ class SettingsView: UIView {
         cardColorsView.addSubview(cardColorsLabel)
         cardColorsView.addSubview(cardColorsStackView)
         
-        
-
-        
         addSubview(cardTypesView)
+        cardTypesView.addSubview(cardTypesLabel)
+        cardTypesView.addSubview(cardTypesStackView)
 
         addSubview(backSideShapesView)
+        backSideShapesView.addSubview(backSideShapeLabel)
+        backSideShapesView.addSubview(backSideShapeStackView)
     }
     
     private func setupAppearance() {
@@ -216,11 +246,32 @@ extension SettingsView: SettingsControllerDelegate {
         cardTypesView.center.x = self.center.x
         cardTypesView.frame.origin.y = cardColorsView.frame.maxY + commonPadding
         
+        cardTypesLabel.frame.size.width = innerlabelWidth
+        cardTypesLabel.frame.size.height = innerlabelHeight
+        cardTypesLabel.center = cardTypesView.convert(cardTypesView.center, from: self)
+        cardTypesLabel.frame.origin.y = innerViewPadding
+        
+        cardTypesStackView.frame.size.width = innerlabelWidth
+        cardTypesStackView.frame.size.height = innerlabelHeight * 2
+        cardTypesStackView.center = cardTypesLabel.center
+        cardTypesStackView.frame.origin.y = cardTypesLabel.frame.maxY + innerViewPadding
+        
         // MARK: - Back side shapes sizes
         backSideShapesView.frame.size.width = commonViewWidth
         backSideShapesView.frame.size.height = commonViewHeight
         backSideShapesView.center.x = self.center.x
         backSideShapesView.frame.origin.y = cardTypesView.frame.maxY + commonPadding
+        
+        backSideShapeLabel.frame.size.width = innerlabelWidth
+        backSideShapeLabel.frame.size.height = innerlabelHeight
+        backSideShapeLabel.center = backSideShapesView.convert(backSideShapesView.center, from: self)
+        backSideShapeLabel.frame.origin.y = innerViewPadding
+        
+        backSideShapeStackView.frame.size.width = innerlabelWidth
+        backSideShapeStackView.frame.size.height = innerlabelHeight * 2
+        backSideShapeStackView.center = backSideShapeLabel.center
+        backSideShapeStackView.frame.origin.y = backSideShapeLabel.frame.maxY + innerViewPadding
+        
     }
     // MARK: - Update through settings
     func updateNumberOfPairs(with value: Float) {
