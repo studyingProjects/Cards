@@ -29,20 +29,20 @@ class CardViewFactory {
         }
     }
     
-    func getSettingsChoiceView(_ shape : CardType, withSize size: CGSize, andColor color: CardColor, andCover cover: CardCover? = nil) -> UIView {
+    func getSettingsChoiceView(_ shape : CardType, withSize size: CGSize, andColor color: CardColor, andCover cover: CardCover? = nil, settingType: SettingsChoiceViewTypes) -> SettingsChoiceViewProtocol {
         let frame = CGRect(origin: .zero, size: size)
         let viewColor = getViewColorBy(modelColor: color)
         switch shape {
         case .circle:
-            return SettingsChoiceView<CircleShape>(frame: frame, color: viewColor)
+            return SettingsChoiceView<CircleShape>(frame: frame, color: viewColor, settingType: settingType)
         case .cross:
-            return SettingsChoiceView<CrossShape>(frame: frame, color: viewColor)
+            return SettingsChoiceView<CrossShape>(frame: frame, color: viewColor, settingType: settingType)
         case .square:
-            return SettingsChoiceView<SquareShape>(frame: frame, color: viewColor)
+            return SettingsChoiceView<SquareShape>(frame: frame, color: viewColor, settingType: settingType)
         case .fill:
-            return SettingsChoiceView<FillShape>(frame: frame, color: viewColor, cover)
+            return SettingsChoiceView<FillShape>(frame: frame, color: viewColor, cover, settingType: settingType)
         case .emptyCircle:
-            return SettingsChoiceView<EmtyCircleShape>(frame: frame, color: viewColor)
+            return SettingsChoiceView<EmtyCircleShape>(frame: frame, color: viewColor, settingType: settingType)
         }
         
     }

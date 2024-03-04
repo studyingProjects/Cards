@@ -7,22 +7,31 @@
 
 import UIKit
 
+
+enum SettingsChoiceViewTypes {
+    case cardType
+    case cardCover
+    case cardColor
+}
+
 protocol SettingsChoiceViewProtocol: UIView {
     var choiceCompletionHandler: ((SettingsChoiceViewProtocol) -> Void)? { get set }
     var isChosen: Bool { get set }
+    var settingType: SettingsChoiceViewTypes! { get set }
     
     func choose()
     func setupSubViews()
 }
 
 class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceViewProtocol {
-    
     var choiceCompletionHandler: ((SettingsChoiceViewProtocol) -> Void)?
     var isChosen: Bool = true {
         didSet {
             self.setNeedsDisplay()
         }
     }
+    var settingType: SettingsChoiceViewTypes!
+    
     private var color: UIColor!
     private var cover: CardCover?
     private let cornerRadius = 5
@@ -30,10 +39,11 @@ class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceV
     lazy private var isChosenSideView: UIView = self.getChosenSideView()
     lazy private var isNotChoisenSideView: UIView = self.getNotChoisenSideView()
     
-    init(frame: CGRect, color: UIColor, _ cover: CardCover? = nil) {
+    init(frame: CGRect, color: UIColor, _ cover: CardCover? = nil, settingType: SettingsChoiceViewTypes) {
         super.init(frame: frame)
         self.color = color
         self.cover = cover
+        self.settingType = settingType
     }
     
     required init?(coder: NSCoder) {

@@ -16,7 +16,7 @@ class SettingsController: UIViewController {
     private var settingsView: SettingsView!
     private var storage: SettingsStorageProtocol!
     var delegate: SettingsControllerDelegate?
-    
+    // MARK: - Lifecycle
     override func loadView() {
         settingsView = SettingsView()
         settingsView.delegate = self
@@ -34,40 +34,70 @@ class SettingsController: UIViewController {
         super.viewWillLayoutSubviews()
         self.delegate?.setViewsSizes()
     }
-    
+    // MARK: - Load settings
     private func loadSettings() {
         self.delegate?.updateNumberOfPairs(with: storage.countOfCardPairs)
         
+        let viewFactory = CardViewFactory()
+        let size = CGSize(width: 50, height: 50)
         // Card Colors
         var arrayOfColors: [UIView] = []
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .red))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .green))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .black))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .gray))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .brown))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .yellow))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .purple))
-        arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .orange))
+        let storedColors = storage.cardColors
+        CardColor.allCases.forEach { cardColor in
+            let cardColorChoiceView = viewFactory.getSettingsChoiceView(
+                .fill,
+                withSize: size,
+                andColor: cardColor,
+                settingType: .cardColor)
+            
+            if !storedColors.contains(cardColor) {
+                cardColorChoiceView.isChosen = false
+            }
+            
+            arrayOfColors.append(cardColorChoiceView)
+        }
         self.delegate?.updateCardColors(with: arrayOfColors)
         
-        // card types
+        // Card types
         var arrayOfTypes: [UIView] = []
-        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.square, withSize: CGSize(width: 50, height: 50), andColor: .black))
-        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.circle, withSize: CGSize(width: 50, height: 50), andColor: .black))
-        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.cross, withSize: CGSize(width: 50, height: 50), andColor: .black))
-        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.emptyCircle, withSize: CGSize(width: 50, height: 50), andColor: .black))
-        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 50, height: 50), andColor: .black))
+        let storedTypes = storage.cardTypes
+        CardType.allCases.forEach { cardType in
+            let cardTypeChoiceView = viewFactory.getSettingsChoiceView(
+                cardType,
+                withSize: size,
+                andColor: .black,
+                settingType: .cardType)
+            
+            if !storedTypes.contains(cardType) {
+                cardTypeChoiceView.isChosen = false
+            }
+            
+            arrayOfTypes.append(cardTypeChoiceView)
+        }
         self.delegate?.updateCardTypes(with: arrayOfTypes)
     
-        // card covers
+        // Card covers
         var arrayOfCovers: [UIView] = []
-        arrayOfCovers.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .orange, andCover: CardCover.line))
-        arrayOfCovers.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .orange, andCover: CardCover.circle))
+        let storedCovers = storage.cardBackCovers
+        CardCover.allCases.forEach { cardCover in
+            let cardCoverChoiceView = viewFactory.getSettingsChoiceView(
+                .fill,
+                withSize: size,
+                andColor: .black,
+                andCover: cardCover,
+                settingType: .cardCover)
+            
+            if !storedCovers.contains(cardCover) {
+                cardCoverChoiceView.isChosen = false
+            }
+            
+            arrayOfCovers.append(cardCoverChoiceView)
+        }
         delegate?.updateCardCovers(with: arrayOfCovers)
     }
     
 }
-
+// MARK: - Extensions
 extension SettingsController: SettingsViewDelegate {
     func setCountOfCard(_ newValue: Float) {
         storage.countOfCardPairs = newValue

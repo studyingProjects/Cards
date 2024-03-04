@@ -108,8 +108,8 @@
             filePath = "Cards/Model/Settings.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "setSettingForKey(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -124,8 +124,8 @@
             filePath = "Cards/Model/Settings.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "getSettingWithKey(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -172,8 +172,8 @@
             filePath = "Cards/View/Settings/SettingsChoiceView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "setupSubViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -188,8 +188,8 @@
             filePath = "Cards/View/Settings/SettingsChoiceView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "choose()"
             landmarkType = "7">
          </BreakpointContent>
@@ -204,8 +204,8 @@
             filePath = "Cards/View/Settings/SettingsChoiceView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "getNotChoisenSideView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -220,9 +220,25 @@
             filePath = "Cards/View/Settings/SettingsChoiceView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "setupSubViews()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "807DFC58-2DFA-49EE-99D3-9770C910F9B4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cards/Model/Settings.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "getSettingWithKey(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

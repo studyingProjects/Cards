@@ -9,10 +9,9 @@ import Foundation
 
 protocol SettingsStorageProtocol {
     var countOfCardPairs: Float { get set }
-}
-
-enum SettingsChoiceViewTypes {
-    
+    var cardColors: [CardColor] { get set }
+    var cardTypes: [CardType] { get set }
+    var cardBackCovers: [CardCover] { get set }
 }
 
 class SettingsStorage: SettingsStorageProtocol {
@@ -67,7 +66,7 @@ class SettingsStorage: SettingsStorageProtocol {
     }
     
     private init() {}
-    
+    // MARK: - Get settings with Key
     private func getSettingWithKey(_ key: SettingsKeys) -> Any {
         let value = storage.value(forKey: key.rawValue)
         
@@ -78,11 +77,42 @@ class SettingsStorage: SettingsStorageProtocol {
             }
             return castedValue
         case .cardColors:
-            return [CardColor.black, CardColor.green, CardColor.orange]
+            guard let castedDict = value as? [String: Bool] else {
+                return CardColor.allCases
+            }
+            var arrayOfColors = [CardColor]()
+            CardColor.allCases.forEach { cardColor in
+                let isChosen = castedDict[cardColor.rawValue] ?? true
+                if isChosen {
+                    arrayOfColors.append(cardColor)
+                }
+            }
+            return arrayOfColors
         case .cardTypes:
-            return [CardType.cross, CardType.circle, CardType.fill]
+            guard let castedDict = value as? [String: Bool] else {
+                return CardType.allCases
+            }
+            var arrayOfTypes = [CardType]()
+            CardType.allCases.forEach { cardType in
+                let isChosen = castedDict[cardType.rawValue] ?? true
+                if isChosen {
+                    arrayOfTypes.append(cardType)
+                }
+            }
+            return arrayOfTypes
         case .cardCovers:
-            return [CardCover.line]
+            guard let castedDict = value as? [String: Bool] else {
+                return CardCover.allCases
+            }
+            var arrayOfCovers = [CardCover]()
+            CardCover.allCases.forEach { cardCover in
+                let isChosen = castedDict[cardCover.rawValue] ?? true
+                if isChosen {
+                    arrayOfCovers.append(cardCover)
+                }
+            }
+            
+            return arrayOfCovers
         }
     }
     
