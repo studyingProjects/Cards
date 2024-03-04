@@ -7,17 +7,11 @@
 
 import UIKit
 
-
-enum SettingsChoiceViewTypes {
-    case cardType
-    case cardCover
-    case cardColor
-}
-
 protocol SettingsChoiceViewProtocol: UIView {
     var choiceCompletionHandler: ((SettingsChoiceViewProtocol) -> Void)? { get set }
     var isChosen: Bool { get set }
-    var settingType: SettingsChoiceViewTypes! { get set }
+    var color: UIColor! { get set }
+    var settingType: Any! { get }
     
     func choose()
     func setupSubViews()
@@ -30,16 +24,16 @@ class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceV
             self.setNeedsDisplay()
         }
     }
-    var settingType: SettingsChoiceViewTypes!
+    var settingType: Any!
     
-    private var color: UIColor!
+    var color: UIColor!
     private var cover: CardCover?
     private let cornerRadius = 5
     private let margin: Int = 5
     lazy private var isChosenSideView: UIView = self.getChosenSideView()
     lazy private var isNotChoisenSideView: UIView = self.getNotChoisenSideView()
     
-    init(frame: CGRect, color: UIColor, _ cover: CardCover? = nil, settingType: SettingsChoiceViewTypes) {
+    init(frame: CGRect, color: UIColor, _ cover: CardCover? = nil, settingType: Any) {
         super.init(frame: frame)
         self.color = color
         self.cover = cover

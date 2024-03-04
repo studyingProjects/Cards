@@ -41,7 +41,11 @@ class SettingsStorage: SettingsStorageProtocol {
         }
         
         set {
-            setSettingForKey(newValue, .cardColors)
+            var newDict: [String: Bool] = [:]
+            newValue.forEach { value in
+                newDict[value.rawValue] = false
+            }
+            setSettingForKey(newDict, .cardColors)
         }
     }
     
@@ -51,7 +55,11 @@ class SettingsStorage: SettingsStorageProtocol {
         }
         
         set {
-            setSettingForKey(newValue, .cardTypes)
+            var newDict: [String: Bool] = [:]
+            newValue.forEach { value in
+                newDict[value.rawValue] = false
+            }
+            setSettingForKey(newDict, .cardTypes)
         }
     }
     
@@ -61,7 +69,11 @@ class SettingsStorage: SettingsStorageProtocol {
         }
         
         set {
-            setSettingForKey(newValue, .cardCovers)
+            var newDict: [String: Bool] = [:]
+            newValue.forEach { value in
+                newDict[value.rawValue] = false
+            }
+            setSettingForKey(newDict, .cardCovers)
         }
     }
     

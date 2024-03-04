@@ -29,7 +29,7 @@ class CardViewFactory {
         }
     }
     
-    func getSettingsChoiceView(_ shape : CardType, withSize size: CGSize, andColor color: CardColor, andCover cover: CardCover? = nil, settingType: SettingsChoiceViewTypes) -> SettingsChoiceViewProtocol {
+    func getSettingsChoiceView(_ shape : CardType, withSize size: CGSize, andColor color: CardColor, andCover cover: CardCover? = nil, settingType: Any) -> SettingsChoiceViewProtocol {
         let frame = CGRect(origin: .zero, size: size)
         let viewColor = getViewColorBy(modelColor: color)
         switch shape {
