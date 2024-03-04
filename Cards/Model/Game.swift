@@ -10,6 +10,12 @@ import Foundation
 class Game {
     // количество пар уникальных карточек
     var cardsCount = 0
+    // Card colors to choice
+    var cardColors = [CardColor]()
+    // Type of figures
+    var cardTypes = [CardType]()
+    // Card back side covers
+    var cardBackCovers = [CardCover]()
     // массив сгенерированных карточек
     var cards = [Card]()
     
@@ -18,7 +24,8 @@ class Game {
         // генерируем новый массив карточек
         var cards = [Card]()
         for _ in 0..<cardsCount {
-            let randomElement = (type: CardType.allCases.randomElement()!, color: CardColor.allCases.randomElement()!)
+//            let randomElement = (type: CardType.allCases.randomElement()!, color: CardColor.allCases.randomElement()!, cover: CardCover.circle)
+            let randomElement = (type: cardTypes.randomElement()!, color: cardColors.randomElement()!, covers: cardBackCovers)
             cards.append(randomElement)
         }
         self.cards = cards

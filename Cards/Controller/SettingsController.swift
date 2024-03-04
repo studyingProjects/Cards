@@ -38,6 +38,7 @@ class SettingsController: UIViewController {
     private func loadSettings() {
         self.delegate?.updateNumberOfPairs(with: storage.countOfCardPairs)
         
+        // Card Colors
         var arrayOfColors: [UIView] = []
         arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .red))
         arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .green))
@@ -47,8 +48,22 @@ class SettingsController: UIViewController {
         arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .yellow))
         arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .purple))
         arrayOfColors.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .orange))
-        
         self.delegate?.updateCardColors(with: arrayOfColors)
+        
+        // card types
+        var arrayOfTypes: [UIView] = []
+        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.square, withSize: CGSize(width: 50, height: 50), andColor: .black))
+        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.circle, withSize: CGSize(width: 50, height: 50), andColor: .black))
+        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.cross, withSize: CGSize(width: 50, height: 50), andColor: .black))
+        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.emptyCircle, withSize: CGSize(width: 50, height: 50), andColor: .black))
+        arrayOfTypes.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 50, height: 50), andColor: .black))
+        self.delegate?.updateCardTypes(with: arrayOfTypes)
+    
+        // card covers
+        var arrayOfCovers: [UIView] = []
+        arrayOfCovers.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .orange, andCover: CardCover.line))
+        arrayOfCovers.append(CardViewFactory().getSettingsChoiceView(.fill, withSize: CGSize(width: 40, height: 40), andColor: .orange, andCover: CardCover.circle))
+        delegate?.updateCardCovers(with: arrayOfCovers)
     }
     
 }

@@ -21,6 +21,9 @@ class SettingsStorage: SettingsStorageProtocol {
     
     enum SettingsKeys: String {
         case countOfCardPairs
+        case cardColors
+        case cardTypes
+        case cardCovers
     }
     
     var countOfCardPairs: Float {
@@ -30,6 +33,36 @@ class SettingsStorage: SettingsStorageProtocol {
         
         set {
             setSettingForKey(newValue, .countOfCardPairs)
+        }
+    }
+    
+    var cardColors: [CardColor] {
+        get {
+            return getSettingWithKey(.cardColors) as! [CardColor]
+        }
+        
+        set {
+            setSettingForKey(newValue, .cardColors)
+        }
+    }
+    
+    var cardTypes: [CardType] {
+        get {
+            return getSettingWithKey(.cardTypes) as! [CardType]
+        }
+        
+        set {
+            setSettingForKey(newValue, .cardTypes)
+        }
+    }
+    
+    var cardBackCovers: [CardCover] {
+        get {
+            return getSettingWithKey(.cardCovers) as! [CardCover]
+        }
+        
+        set {
+            setSettingForKey(newValue, .cardCovers)
         }
     }
     
@@ -44,6 +77,12 @@ class SettingsStorage: SettingsStorageProtocol {
                 return Float(8.0)
             }
             return castedValue
+        case .cardColors:
+            return [CardColor.black, CardColor.green, CardColor.orange]
+        case .cardTypes:
+            return [CardType.cross, CardType.circle, CardType.fill]
+        case .cardCovers:
+            return [CardCover.line]
         }
     }
     

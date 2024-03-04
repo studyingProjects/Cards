@@ -12,6 +12,30 @@ protocol SettingsControllerDelegate {
     func setViewsSizes()
     func updateNumberOfPairs(with value: Float)
     func updateCardColors(with array: [UIView])
+    func updateCardTypes(with array: [UIView])
+    func updateCardCovers(with array: [UIView])
+}
+// MARK: - CardSettingStackView
+class CardSettingsStackView: UIStackView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        arrangedSubviews.forEach { view in
+            if let settingsChoiceView = view as? SettingsChoiceViewProtocol {
+                settingsChoiceView.setupSubViews()
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.axis = .horizontal
+        self.spacing = 10.0
+        self.distribution = .fillEqually
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 class SettingsView: UIView {
@@ -71,21 +95,7 @@ class SettingsView: UIView {
         return label
     }()
     
-    private lazy var cardColorsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 10.0
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-//    private lazy var colorViews: [UIView] = {
-//        let colorView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-//        colorView.layer.borderWidth = 3.0
-//        colorView.layer.borderColor = UIColor.orange.cgColor
-//        return [colorView]
-//    }()
+    private lazy var cardColorsStackView = CardSettingsStackView()
     
     // MARK: - Card types section
     private lazy var cardTypesView: UIView = {
@@ -105,14 +115,7 @@ class SettingsView: UIView {
         return label
     }()
     
-    private lazy var cardTypesStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 10.0
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
+    private lazy var cardTypesStackView = CardSettingsStackView()
     
     // MARK: - Back side shapes section
     private lazy var backSideShapesView: UIView = {
@@ -132,14 +135,7 @@ class SettingsView: UIView {
         return label
     }()
     
-    private lazy var backSideShapeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 10.0
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
+    private lazy var backSideShapeStackView = CardSettingsStackView()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -282,6 +278,18 @@ extension SettingsView: SettingsControllerDelegate {
     func updateCardColors(with array: [UIView]) {
         array.forEach { colorView in
             cardColorsStackView.addArrangedSubview(colorView)
+        }
+    }
+    
+    func updateCardTypes(with array: [UIView]) {
+        array.forEach { cardTypeView in
+            cardTypesStackView.addArrangedSubview(cardTypeView)
+        }
+    }
+    
+    func updateCardCovers(with array: [UIView]) {
+        array.forEach { cardCoverView in
+            backSideShapeStackView.addArrangedSubview(cardCoverView)
         }
     }
     

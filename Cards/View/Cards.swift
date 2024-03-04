@@ -24,6 +24,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
     var handleFlip: Bool = true
     // цвет фигуры
     var color: UIColor!
+    var cover: CardCover!
     var flipCompletionHandler: ((FlippableView) -> Void)?
     // внутренний отступ представления
     private let margin: Int = 10
@@ -38,9 +39,10 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
     private var startTouchPoint: CGPoint!
     
     
-    init(frame: CGRect, color: UIColor) {
+    init(frame: CGRect, color: UIColor, _ cover: CardCover) {
         super.init(frame: frame)
         self.color = color
+        self.cover = cover
         
         if isFlipped {
             self.addSubview(backSideView)
@@ -163,11 +165,11 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         let view = UIView(frame: self.bounds)
         view.backgroundColor = .white
         //выбор случайного узора для рубашки
-        switch ["circle", "line"].randomElement()! {
-        case "circle":
+        switch self.cover {
+        case .circle:
             let layer = BackSideCircle(size: self.bounds.size, fillColor: UIColor.black.cgColor)
             view.layer.addSublayer(layer)
-        case "line":
+        case .line:
             let layer = BackSideLine(size: self.bounds.size, fillColor: UIColor.black.cgColor)
             view.layer.addSublayer(layer)
         default:

@@ -18,6 +18,12 @@ class BoardGameController: UIViewController {
     // MARK: - Game settings
     // количество пар уникальных карточек
     private var cardsPairsCounts = Int(SettingsStorage.shared.countOfCardPairs)
+    // Card colors to choice
+    private var cardColors = SettingsStorage.shared.cardColors
+    // Type of figures
+    private var cardTypes = SettingsStorage.shared.cardTypes
+    // Card back side covers
+    private var cardBackCovers = SettingsStorage.shared.cardBackCovers
     
     // игральные карточки
     private var cardViews = [UIView]()
@@ -197,6 +203,9 @@ class BoardGameController: UIViewController {
     private func getNewGame() -> Game {
         let game = Game()
         game.cardsCount = self.cardsPairsCounts
+        game.cardBackCovers = self.cardBackCovers
+        game.cardColors = self.cardColors
+        game.cardTypes = self.cardTypes
         game.generateCards()
         return game
     }
@@ -209,11 +218,11 @@ class BoardGameController: UIViewController {
         let cardViewFactory = CardViewFactory() // перебираем массив карточек в Модели
         for (index, modelCard) in modelData.enumerated() {
             // добавляем первый экземпляр карты
-            let cardOne = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color)
+            let cardOne = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color, and: modelCard.covers.randomElement()!)
             cardOne.tag = index
             cardViews.append(cardOne)
             // добавляем второй экземпляр карты
-            let cardTwo = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color)
+            let cardTwo = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color, and: modelCard.covers.randomElement()!)
             cardTwo.tag = index
             cardViews.append(cardTwo)
         }

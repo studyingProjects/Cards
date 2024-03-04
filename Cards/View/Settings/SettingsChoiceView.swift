@@ -12,6 +12,7 @@ protocol SettingsChoiceViewProtocol: UIView {
     var isChosen: Bool { get set }
     
     func choose()
+    func setupSubViews()
 }
 
 class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceViewProtocol {
@@ -23,21 +24,16 @@ class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceV
         }
     }
     private var color: UIColor!
+    private var cover: CardCover?
+    private let cornerRadius = 5
+    private let margin: Int = 5
     lazy private var isChosenSideView: UIView = self.getChosenSideView()
     lazy private var isNotChoisenSideView: UIView = self.getNotChoisenSideView()
     
-    init(frame: CGRect, color: UIColor) {
+    init(frame: CGRect, color: UIColor, _ cover: CardCover? = nil) {
         super.init(frame: frame)
         self.color = color
-        
-        if isChosen {
-            addSubview(isNotChoisenSideView)
-            addSubview(isChosenSideView)
-        } else {
-            addSubview(isChosenSideView)
-            addSubview(isNotChoisenSideView)
-        }
-        
+        self.cover = cover
     }
     
     required init?(coder: NSCoder) {
@@ -53,13 +49,7 @@ class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceV
         isNotChoisenSideView.removeFromSuperview()
         isChosenSideView.removeFromSuperview()
         // добавляем новые представления
-        if isChosen {
-            self.addSubview(isNotChoisenSideView)
-            self.addSubview(isChosenSideView)
-        } else {
-            self.addSubview(isChosenSideView)
-            self.addSubview(isNotChoisenSideView)
-        }
+        setupSubViews()
     }
     
     func choose() {
@@ -73,11 +63,29 @@ class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceV
         isChosen.toggle()
     }
     
+    func setupSubViews() {
+        if isChosen {
+            addSubview(isNotChoisenSideView)
+            addSubview(isChosenSideView)
+            
+            self.layer.borderWidth = 5
+            self.layer.borderColor = UIColor.blue.cgColor
+        } else {
+            addSubview(isChosenSideView)
+            addSubview(isNotChoisenSideView)
+            
+            self.layer.borderWidth = 2
+            self.layer.borderColor = UIColor.black.cgColor
+        }
+        setupBorders()
+    }
+    
     private func getChosenSideView() -> UIView {
-        let view = getNotChoisenSideView()
+        //let view = getNotChoisenSideView()
+        let view = self.isNotChoisenSideView
         // add bold border
-        view.layer.borderWidth = 5
-        view.layer.borderColor = UIColor.systemBlue.cgColor
+        //view.layer.borderWidth = 5
+        //view.layer.borderColor = UIColor.systemBlue.cgColor
         // check color equality
         //let fillCollor = (self.color == UIColor.green) ? UIColor.white.cgColor : UIColor.green.cgColor
         //let checkMarkLayer = CheckMark(size: view.frame.size, fillColor: fillCollor)
@@ -89,10 +97,34 @@ class SettingsChoiceView<ShapeType: ShapeLayerProtocol>: UIView, SettingsChoiceV
     private func getNotChoisenSideView() -> UIView {
         let view = UIView(frame: self.bounds)
         view.backgroundColor = .white
-        let shapeLayer = ShapeType(size: view.frame.size, fillColor: self.color.cgColor)
-        view.layer.addSublayer(shapeLayer)
+        let shapeView = UIView(frame: CGRect(x: margin, y: margin,
+                                             width: Int(self.frame.width)-margin*2,
+                                             height: Int(self.frame.height)-margin*2))
+        view.addSubview(shapeView)
+        var shapeLayer: ShapeLayerProtocol
+        if let cover = self.cover {
+            switch cover {
+            case .circle:
+                shapeLayer = BackSideCircle(size: self.bounds.size, fillColor: UIColor.black.cgColor)
+            case .line:
+                shapeLayer = BackSideLine(size: self.bounds.size, fillColor: UIColor.black.cgColor)
+            }
+        } else {
+            shapeLayer = ShapeType(size: shapeView.frame.size, fillColor: self.color.cgColor)
+        }
+        shapeView.layer.addSublayer(shapeLayer)
+        
+        // скругляем углы корневого слоя
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = CGFloat(cornerRadius)
         
         return view
+    }
+    
+    // настройка границ
+    private func setupBorders() {
+        self.clipsToBounds = true
+        self.layer.cornerRadius = CGFloat(cornerRadius)
     }
     
 
