@@ -57,15 +57,15 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingColumnNumber</key>
-					<string>39</string>
+					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>207</string>
+					<string>223</string>
 					<key>StartingColumnNumber</key>
-					<string>39</string>
+					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>207</string>
+					<string>222</string>
 					<key>Timestamp</key>
-					<string>731239363.207808</string>
+					<string>731319308.880785</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -81,15 +81,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string></string>
+				<string>        game.cardTypes = self.cardTypes
+</string>
 				<key>leading</key>
 				<string>        game.cardBackCovers = self.cardBackCovers
         game.cardColors = self.cardColors
-        game.cardTypes = self.cardTypes</string>
+</string>
 				<key>trailing</key>
-				<string>
-        game.generateCards()
+				<string>        game.generateCards()
         return game
+    }
 </string>
 			</dict>
 			<key>title</key>
@@ -105,13 +106,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>216</string>
+					<string>231</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>215</string>
+					<string>230</string>
 					<key>Timestamp</key>
-					<string>731239342.750983</string>
+					<string>731319308.880772</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -288,13 +289,13 @@ cla</string>
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>282</string>
+					<string>311</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>281</string>
+					<string>310</string>
 					<key>Timestamp</key>
-					<string>731239342.7509691</string>
+					<string>731320795.9588391</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>

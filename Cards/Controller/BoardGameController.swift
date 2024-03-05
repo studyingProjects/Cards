@@ -12,6 +12,8 @@ class BoardGameController: UIViewController {
     // кнопка для запуска/перезапуска игры
     private lazy var startButtonView = getStartButtonView()
     private lazy var flipAllButtonView = getFlipAllButton()
+    // label количество переворотов
+    private lazy var flipCountsLabel = getFlipCountsLabel()
     // игровое поле
     private lazy var boardGameView = getBoardGameView()
     
@@ -32,7 +34,7 @@ class BoardGameController: UIViewController {
     private lazy var game: Game = getNewGame()
     // размеры карточек
     private var cardSize: CGSize {
-        CGSize(width: 80, height: 120)
+        CGSize(width: 70, height: 100)
     }
     // предельные координаты размещения карточки
     private var cardMaxXCoordinate: Int {
@@ -48,6 +50,7 @@ class BoardGameController: UIViewController {
         // добавляем кнопку на сцену
         view.addSubview(startButtonView)
         view.addSubview(flipAllButtonView)
+        view.addSubview(flipCountsLabel)
         // добавляем игровое поле на сцену
         view.addSubview(boardGameView)
     }
@@ -71,11 +74,15 @@ class BoardGameController: UIViewController {
         flipAllButtonView.frame.origin.y = topPadding
         flipAllButtonView.frame.origin.x = view.frame.width - commonPadding - flipAllButtonView.bounds.width
         
+        flipCountsLabel.frame.origin.x = startButtonView.frame.origin.x
+        flipCountsLabel.frame.origin.y = topPadding + flipAllButtonView.frame.height + commonPadding / 2
+        flipCountsLabel.frame.size.width = view.bounds.width - commonPadding * 2
+        
         // указываем координаты
         // x
         boardGameView.frame.origin.x = commonPadding
         // y
-        boardGameView.frame.origin.y = topPadding + startButtonView.frame.height + commonPadding
+        boardGameView.frame.origin.y = flipCountsLabel.frame.origin.y + flipCountsLabel.frame.height + commonPadding
         // рассчитываем ширину
         boardGameView.frame.size.width = view.bounds.width - commonPadding * 2
         // рассчитываем высоту
@@ -145,6 +152,13 @@ class BoardGameController: UIViewController {
         
         return button
     }
+    // MARK: - Flip counts label
+    private func getFlipCountsLabel() -> UILabel {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 25))
+        label.text = "Количество переворотов:"
+        label.textAlignment = .right
+        return label
+    }
     // MARK: - Board game View
     private func getBoardGameView() -> UIView {
         // отступ игрового поля от ближайших элементов
@@ -178,6 +192,7 @@ class BoardGameController: UIViewController {
         game = getNewGame()
         let cards = getCardsBy(modelData: game.cards)
         placeCardsOnBoard(cards)
+        flipCountsLabel.text = "Количество переворотов: "
     }
     // MARK: - Flip All Cards
     @objc func flipAllCards(_ sender: UIButton) {
@@ -270,6 +285,20 @@ class BoardGameController: UIViewController {
                         for card in self.flippedCards {
                             (card as! FlippableView).flip()
                         }
+                    }
+                    // считаем количество переворотов и выводим в label
+                    self.game.flipCounts += 1
+                    self.flipCountsLabel.text = String("Количество переворотов: \(self.game.flipCounts)")
+                    if self.boardGameView.subviews.filter({ $0.layer.opacity != 0}).count == 0 {
+                        let alert = UIAlertController(title: "Game end. Wanna try again?",
+                                                      message: "Overall flips count: \(self.game.flipCounts)",
+                                                      preferredStyle: .alert)
+                        
+                        let action = UIAlertAction(title: "Restart game", style: .default, handler: { _ in self.startGame(self.startButtonView)})
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                        alert.addAction(action)
+                        alert.addAction(cancelAction)
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
                  

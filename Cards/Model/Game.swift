@@ -18,6 +18,8 @@ class Game {
     var cardBackCovers = [CardCover]()
     // массив сгенерированных карточек
     var cards = [Card]()
+    // Количество переворотов
+    var flipCounts: Int = 0
     
     // генерация массива случайных карт
     func generateCards() {
