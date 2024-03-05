@@ -10,12 +10,17 @@ import UIKit
 protocol FlippableView: UIView {
     var isFlipped: Bool { get set }
     var handleFlip: Bool { get set }
+    var propertyIndex: Int! { get set }
     var flipCompletionHandler: ((FlippableView) -> Void)? { get set }
+    var saveViewStageCompletionHandler: ((FlippableView) -> Void)? { get set }
+    
     func flip()
+    func saveViewStage()
 }
 // MARK: - Generic class CardView
 class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
-    
+    var propertyIndex: Int!
+    var saveViewStageCompletionHandler: ((FlippableView) -> Void)?
     var isFlipped: Bool = false {
         didSet {
             self.setNeedsDisplay()
@@ -39,10 +44,11 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
     private var startTouchPoint: CGPoint!
     
     
-    init(frame: CGRect, color: UIColor, _ cover: CardCover) {
+    init(frame: CGRect, color: UIColor, _ cover: CardCover, cardIndex: Int) {
         super.init(frame: frame)
         self.color = color
         self.cover = cover
+        self.propertyIndex = cardIndex
         
         if isFlipped {
             self.addSubview(backSideView)
@@ -104,6 +110,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
             handleFlip = true
             flip()
         }
+        saveViewStage()
     }
     
     override func draw(_ rect: CGRect) {
@@ -139,6 +146,10 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
             self.flipCompletionHandler?(self)
         })
         isFlipped.toggle() //isFlipped = !isFlipped
+    }
+    func saveViewStage() {
+        // обработчик сохранения настроек текущей карты (вью)
+        self.saveViewStageCompletionHandler?(self)
     }
     // MARK: - Front/Back Side Views
     // возвращает представление для лицевой стороны карточки

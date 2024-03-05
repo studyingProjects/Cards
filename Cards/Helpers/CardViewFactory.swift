@@ -9,25 +9,62 @@ import UIKit
 
 class CardViewFactory {
     
-    func get(_ shape: CardType, withSize size: CGSize, andColor color: CardColor, and cover: CardCover) -> UIView {
-        // на основе размеров определяем фрейм
+    func getCardView(from cardModel: Card, withSize size: CGSize, withProperties viewProperty: CardViewProperty, _ cardNumber: Int) -> UIView {
+        
         let frame = CGRect(origin: .zero, size: size)
-        // определяем UI-цвет на основе цвета модели
-        let viewColor = getViewColorBy(modelColor: color)
-        // генерируем и возвращаем карточку
-        switch shape {
+        let viewColor = getViewColorBy(modelColor: cardModel.color)
+        
+        let view: FlippableView = switch cardModel.type {
         case .circle:
-            return CardView<CircleShape>(frame: frame, color: viewColor, cover)
+            CardView<CircleShape>(frame: frame, color: viewColor, viewProperty.cover, cardIndex: cardNumber)
         case .cross:
-            return CardView<CrossShape>(frame: frame, color: viewColor, cover)
+            CardView<CrossShape>(frame: frame, color: viewColor, viewProperty.cover, cardIndex: cardNumber)
         case .square:
-            return CardView<SquareShape>(frame: frame, color: viewColor, cover)
+            CardView<SquareShape>(frame: frame, color: viewColor, viewProperty.cover, cardIndex: cardNumber)
         case .fill:
-            return CardView<FillShape>(frame: frame, color: viewColor, cover)
+            CardView<FillShape>(frame: frame, color: viewColor, viewProperty.cover, cardIndex: cardNumber)
         case .emptyCircle:
-            return CardView<EmtyCircleShape>(frame: frame, color: viewColor, cover)
+            CardView<EmtyCircleShape>(frame: frame, color: viewColor, viewProperty.cover, cardIndex: cardNumber)
         }
+        
+        if let opacity = viewProperty.opacity {
+            view.layer.opacity = opacity
+        }
+        if let originX = viewProperty.originX {
+            view.frame.origin.x = originX
+        }
+        if let originY = viewProperty.originY {
+            view.frame.origin.y = originY
+        }
+        if let isFlipped = viewProperty.isFlipped {
+            view.isFlipped = isFlipped
+        }
+        
+        return view
+        
     }
+    
+    
+    
+//    func get(_ shape: CardType, withSize size: CGSize, andColor color: CardColor, and cover: CardCover) -> UIView {
+//        // на основе размеров определяем фрейм
+//        let frame = CGRect(origin: .zero, size: size)
+//        // определяем UI-цвет на основе цвета модели
+//        let viewColor = getViewColorBy(modelColor: color)
+//        // генерируем и возвращаем карточку
+//        switch shape {
+//        case .circle:
+//            return CardView<CircleShape>(frame: frame, color: viewColor, cover)
+//        case .cross:
+//            return CardView<CrossShape>(frame: frame, color: viewColor, cover)
+//        case .square:
+//            return CardView<SquareShape>(frame: frame, color: viewColor, cover)
+//        case .fill:
+//            return CardView<FillShape>(frame: frame, color: viewColor, cover)
+//        case .emptyCircle:
+//            return CardView<EmtyCircleShape>(frame: frame, color: viewColor, cover)
+//        }
+//    }
     
     func getSettingsChoiceView(_ shape : CardType, withSize size: CGSize, andColor color: CardColor, andCover cover: CardCover? = nil, settingType: Any) -> SettingsChoiceViewProtocol {
         let frame = CGRect(origin: .zero, size: size)

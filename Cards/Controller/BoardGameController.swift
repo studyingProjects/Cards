@@ -26,6 +26,7 @@ class BoardGameController: UIViewController {
     private var cardTypes = SettingsStorage.shared.cardTypes
     // Card back side covers
     private var cardBackCovers = SettingsStorage.shared.cardBackCovers
+    private var saveCards = SettingsStorage.shared.cards
     
     // игральные карточки
     private var cardViews = [UIView]()
@@ -232,17 +233,36 @@ class BoardGameController: UIViewController {
         // фабрика карточек
         let cardViewFactory = CardViewFactory() // перебираем массив карточек в Модели
         for (index, modelCard) in modelData.enumerated() {
-            // добавляем первый экземпляр карты
-            let cardOne = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color, and: modelCard.covers.randomElement()!)
+            // old version with tuple
+//            // добавляем первый экземпляр карты
+//            let cardOne = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color, and: modelCard.covers.randomElement()!)
+//            cardOne.tag = index
+//            cardViews.append(cardOne)
+//            // добавляем второй экземпляр карты
+//            let cardTwo = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color, and: modelCard.covers.randomElement()!)
+//            cardTwo.tag = index
+//            cardViews.append(cardTwo)
+            
+            // new version with struct Card
+            let cardOne = cardViewFactory.getCardView(from: modelCard, withSize: cardSize, withProperties: modelCard.viewProperties[0], 0)
             cardOne.tag = index
             cardViews.append(cardOne)
-            // добавляем второй экземпляр карты
-            let cardTwo = cardViewFactory.get(modelCard.type, withSize: cardSize, andColor: modelCard.color, and: modelCard.covers.randomElement()!)
+            
+            let cardTwo = cardViewFactory.getCardView(from: modelCard, withSize: cardSize, withProperties: modelCard.viewProperties[1], 1)
             cardTwo.tag = index
             cardViews.append(cardTwo)
+            
         }
         // добавляем всем картам обработчик переворота
         for card in cardViews {
+            (card as! FlippableView).saveViewStageCompletionHandler = { card in
+                let cardModel = self.game.cards[card.tag]
+                cardModel.viewProperties[card.propertyIndex].isFlipped = card.isFlipped
+                cardModel.viewProperties[card.propertyIndex].originX = card.frame.origin.x
+                cardModel.viewProperties[card.propertyIndex].originY = card.frame.origin.y
+                cardModel.viewProperties[card.propertyIndex].opacity = card.layer.opacity
+                SettingsStorage.shared.cards = self.game.cards
+            }
             (card as! FlippableView).flipCompletionHandler = { flippedCard in
                 
                 if !flippedCard.handleFlip {

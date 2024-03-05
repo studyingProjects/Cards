@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>12</string>
+					<string>49</string>
 					<key>StartingColumnNumber</key>
-					<string>93</string>
+					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>11</string>
+					<string>48</string>
 					<key>Timestamp</key>
-					<string>730906766.308558</string>
+					<string>731345309.638514</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,16 +34,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>
+				<string>    func get(_ shape: CardType, withSize size: CGSize, andColor color: CardColor, and cover: CardCover) -&gt; UIView {
 </string>
 				<key>leading</key>
-				<string>class CardViewFactory {
+				<string>    
     
-    func get(_ shape: CardType, withSize size: CGSize, andColor color: CardColor, and cover: CardCover) -&gt; UIView {</string>
+//</string>
 				<key>trailing</key>
-				<string>        // на основе размеров определяем фрейм
-        let frame = CGRect(origin: .zero, size: size)
-        // определяем UI-цвет на основе цвета модели
+				<string>//        // на основе размеров определяем фрейм
+//        let frame = CGRect(origin: .zero, size: size)
+//        // определяем UI-цвет на основе цвета модели
 </string>
 			</dict>
 			<key>title</key>
@@ -59,13 +59,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>223</string>
+					<string>224</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>222</string>
+					<string>223</string>
 					<key>Timestamp</key>
-					<string>731319308.880785</string>
+					<string>731348968.4036109</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -106,13 +106,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>231</string>
+					<string>232</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>230</string>
+					<string>231</string>
 					<key>Timestamp</key>
-					<string>731319308.880772</string>
+					<string>731348968.403623</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -151,15 +151,15 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingColumnNumber</key>
-					<string>3</string>
+					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>16</string>
+					<string>25</string>
 					<key>StartingColumnNumber</key>
-					<string>3</string>
+					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>16</string>
+					<string>24</string>
 					<key>Timestamp</key>
-					<string>730907650.636397</string>
+					<string>731345900.694859</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -175,15 +175,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string></string>
+				<string>        didSet {
+</string>
 				<key>leading</key>
-				<string>}
-// MARK: - Generic class CardView
-cla</string>
-				<key>trailing</key>
-				<string>ss CardView&lt;ShapeType: ShapeLayerProtocol&gt;: UIView, FlippableView {
-    
+				<string>    var saveViewStageCompletionHandler: ((FlippableView) -&gt; Void)?
     var isFlipped: Bool = false {
+</string>
+				<key>trailing</key>
+				<string>            self.setNeedsDisplay()
+        }
+    }
 </string>
 			</dict>
 			<key>title</key>
@@ -199,13 +200,13 @@ cla</string>
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>145</string>
+					<string>163</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>144</string>
+					<string>162</string>
 					<key>Timestamp</key>
-					<string>731239640.179208</string>
+					<string>731346427.0986069</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -221,16 +222,16 @@ cla</string>
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>    private func getFrontSideView() -&gt; UIView {
+				<string>        // создание слоя с фигурой
 </string>
 				<key>leading</key>
-				<string>    // MARK: - Front/Back Side Views
-    // возвращает представление для лицевой стороны карточки
+				<string>                                             height: Int(self.bounds.height)-margin*2))
+        view.addSubview(shapeView)
 </string>
 				<key>trailing</key>
-				<string>        let view = UIView(frame: self.bounds)
-        view.backgroundColor = .white
-        let shapeView = UIView(frame: CGRect(x: margin, y: margin,
+				<string>        let shapeLayer = ShapeType(size: shapeView.frame.size, fillColor: color.cgColor)
+        shapeView.layer.addSublayer(shapeLayer)
+        
 </string>
 			</dict>
 			<key>type</key>
@@ -244,13 +245,13 @@ cla</string>
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>105</string>
+					<string>114</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>104</string>
+					<string>113</string>
 					<key>Timestamp</key>
-					<string>731239640.179221</string>
+					<string>731346427.098594</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -266,16 +267,16 @@ cla</string>
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>            flip()
+				<string>    }
 </string>
 				<key>leading</key>
-				<string>        if self.frame.origin == startTouchPoint {
-            handleFlip = true
-</string>
-				<key>trailing</key>
 				<string>        }
-    }
-    
+        saveViewStage()
+</string>
+				<key>trailing</key>
+				<string>    
+    override func draw(_ rect: CGRect) {
+        // удаляем добавленные ранее дочерние представления
 </string>
 			</dict>
 			<key>type</key>
@@ -289,13 +290,13 @@ cla</string>
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>311</string>
+					<string>336</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>310</string>
+					<string>335</string>
 					<key>Timestamp</key>
-					<string>731320795.9588391</string>
+					<string>731348968.4036289</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -311,16 +312,16 @@ cla</string>
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>    private func placeCardsOnBoard(_ cards: [UIView]) {
+				<string>        cardViews = cards
 </string>
 				<key>leading</key>
-				<string>    }
-    // MARK: - Cards placing
+				<string>            card.removeFromSuperview()
+        }
 </string>
 				<key>trailing</key>
-				<string>        // удаляем все имеющиеся на игровом поле карточки
+				<string>        // перебираем карточки
         for card in cardViews {
-            card.removeFromSuperview()
+            // для каждой карточки генерируем случайные координаты
 </string>
 			</dict>
 			<key>type</key>

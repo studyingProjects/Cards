@@ -27,15 +27,25 @@ class Game {
         var cards = [Card]()
         for _ in 0..<cardsCount {
 //            let randomElement = (type: CardType.allCases.randomElement()!, color: CardColor.allCases.randomElement()!, cover: CardCover.circle)
-            let randomElement = (type: cardTypes.randomElement()!, color: cardColors.randomElement()!, covers: cardBackCovers)
+            let randomElement = Card(type: cardTypes.randomElement()!,
+                                     color: cardColors.randomElement()!,
+                                     viewProperties: generateViewProperties(with: cardBackCovers))
             cards.append(randomElement)
         }
         self.cards = cards
     }
+    
+    func generateViewProperties(with covers: [CardCover]) -> [CardViewProperty] {
+        var arrayOfProperties = [CardViewProperty]()
+        arrayOfProperties.append(CardViewProperty(cover: covers.randomElement()!))
+        arrayOfProperties.append(CardViewProperty(cover: covers.randomElement()!))
+        return arrayOfProperties
+    }
 
     // проверка эквивалентности карточек
     func checkCards(_ firstCard: Card, _ secondCard: Card) -> Bool {
-        if firstCard == secondCard {
+        if firstCard.type == secondCard.type,
+           firstCard.color == secondCard.color {
             return true
         }
         return false
