@@ -110,7 +110,9 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
             handleFlip = true
             flip()
         }
+        
         saveViewStage()
+        
     }
     
     override func draw(_ rect: CGRect) {

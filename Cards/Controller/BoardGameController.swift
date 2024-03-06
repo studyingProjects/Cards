@@ -27,6 +27,7 @@ class BoardGameController: UIViewController {
     // Card back side covers
     private var cardBackCovers = SettingsStorage.shared.cardBackCovers
     private var saveCards = SettingsStorage.shared.cards
+    private var continueGame: Bool = false
     
     // игральные карточки
     private var cardViews = [UIView]()
@@ -43,6 +44,18 @@ class BoardGameController: UIViewController {
     }
     private var cardMaxYCoordinate: Int {
         Int(boardGameView.frame.height - cardSize.height)
+    }
+    
+    init(continueGame: Bool) {
+        super.init(nibName: nil, bundle: nil)
+        self.continueGame = continueGame
+        if continueGame {
+            self.startGame(UIButton())
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - LifeCycle
@@ -193,7 +206,7 @@ class BoardGameController: UIViewController {
         game = getNewGame()
         let cards = getCardsBy(modelData: game.cards)
         placeCardsOnBoard(cards)
-        flipCountsLabel.text = "Количество переворотов: "
+        flipCountsLabel.text = "Количество переворотов: \(self.game.flipCounts)"
     }
     // MARK: - Flip All Cards
     @objc func flipAllCards(_ sender: UIButton) {
@@ -222,7 +235,15 @@ class BoardGameController: UIViewController {
         game.cardBackCovers = self.cardBackCovers
         game.cardColors = self.cardColors
         game.cardTypes = self.cardTypes
-        game.generateCards()
+        
+        if continueGame {
+            game.cards = SettingsStorage.shared.cards
+            game.flipCounts = SettingsStorage.shared.flipsCount
+        } else {
+            game.generateCards()
+            game.flipCounts = 0
+        }
+        
         return game
     }
     // MARK: - Cards managment
@@ -263,8 +284,9 @@ class BoardGameController: UIViewController {
                 cardModel.viewProperties[card.propertyIndex].opacity = card.layer.opacity
                 SettingsStorage.shared.cards = self.game.cards
             }
+            
             (card as! FlippableView).flipCompletionHandler = { flippedCard in
-                
+                                
                 if !flippedCard.handleFlip {
                     return
                 }
@@ -298,7 +320,12 @@ class BoardGameController: UIViewController {
                             completion: {_ in
                                 self.flippedCards.first!.removeFromSuperview()
                                 self.flippedCards.last!.removeFromSuperview()
+                                let card1 = self.flippedCards.first! as! FlippableView
+                                card1.saveViewStage()
+                                let card2 = self.flippedCards.last! as! FlippableView
+                                card2.saveViewStage()
                                 self.flippedCards = []
+                                
                             })
                     } else {
                         // переворачиваем карточки рубашкой вверх
@@ -308,6 +335,7 @@ class BoardGameController: UIViewController {
                     }
                     // считаем количество переворотов и выводим в label
                     self.game.flipCounts += 1
+                    SettingsStorage.shared.flipsCount = self.game.flipCounts
                     self.flipCountsLabel.text = String("Количество переворотов: \(self.game.flipCounts)")
                     if self.boardGameView.subviews.filter({ $0.layer.opacity != 0}).count == 0 {
                         let alert = UIAlertController(title: "Game end. Wanna try again?",
@@ -336,12 +364,19 @@ class BoardGameController: UIViewController {
         cardViews = cards
         // перебираем карточки
         for card in cardViews {
-            // для каждой карточки генерируем случайные координаты
-            let randomXCoordinate = Int.random(in: 0...cardMaxXCoordinate)
-            let randomYCoordinate = Int.random(in: 0...cardMaxYCoordinate)
-            card.frame.origin = CGPoint(x: randomXCoordinate, y: randomYCoordinate)
+            if !continueGame {
+                // для каждой карточки генерируем случайные координаты
+                let randomXCoordinate = Int.random(in: 0...cardMaxXCoordinate)
+                let randomYCoordinate = Int.random(in: 0...cardMaxYCoordinate)
+                card.frame.origin = CGPoint(x: randomXCoordinate, y: randomYCoordinate)
+                (card as! FlippableView).saveViewStage()
+            }
             // размещаем карточку на игровом поле
             boardGameView.addSubview(card)
+            // при создании новой игры пересохраняем данные
+            // (инициализируем в модель координаты и прозрачность)
+            
         }
+        continueGame = false
     }
 }

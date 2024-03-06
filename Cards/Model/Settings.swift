@@ -13,6 +13,7 @@ protocol SettingsStorageProtocol {
     var cardTypes: [CardType] { get set }
     var cardBackCovers: [CardCover] { get set }
     var cards: [Card] { get set }
+    var flipsCount: Int { get set }
 }
 
 class SettingsStorage: SettingsStorageProtocol {
@@ -25,6 +26,17 @@ class SettingsStorage: SettingsStorageProtocol {
         case cardTypes
         case cardCovers
         case cards
+        case flipsCount
+    }
+    
+    var flipsCount: Int {
+        get {
+            return getSettingWithKey(.flipsCount) as! Int
+        }
+        
+        set {
+            setSettingForKey(newValue, .flipsCount)
+        }
     }
     
     var countOfCardPairs: Float {
@@ -174,6 +186,11 @@ class SettingsStorage: SettingsStorageProtocol {
             return arrayOfCovers
         case .cards:
             return [Card]()
+        case .flipsCount:
+            guard let castedValue = value as? Int else {
+                return 0
+            }
+            return castedValue
         }
     }
     

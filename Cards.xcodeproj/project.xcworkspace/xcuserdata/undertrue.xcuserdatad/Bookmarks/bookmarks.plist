@@ -59,13 +59,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>224</string>
+					<string>237</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>223</string>
+					<string>236</string>
 					<key>Timestamp</key>
-					<string>731348968.4036109</string>
+					<string>731417739.300941</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -88,9 +88,9 @@
         game.cardColors = self.cardColors
 </string>
 				<key>trailing</key>
-				<string>        game.generateCards()
-        return game
-    }
+				<string>        
+        if continueGame {
+            game.cards = SettingsStorage.shared.cards
 </string>
 			</dict>
 			<key>title</key>
@@ -106,13 +106,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>232</string>
+					<string>253</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>231</string>
+					<string>252</string>
 					<key>Timestamp</key>
-					<string>731348968.403623</string>
+					<string>731417739.300952</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -200,13 +200,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>163</string>
+					<string>165</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>162</string>
+					<string>164</string>
 					<key>Timestamp</key>
-					<string>731346427.0986069</string>
+					<string>731405574.837369</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -245,13 +245,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>114</string>
+					<string>116</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>113</string>
+					<string>115</string>
 					<key>Timestamp</key>
-					<string>731346427.098594</string>
+					<string>731405574.837383</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -270,8 +270,8 @@
 				<string>    }
 </string>
 				<key>leading</key>
-				<string>        }
-        saveViewStage()
+				<string>        saveViewStage()
+        
 </string>
 				<key>trailing</key>
 				<string>    
@@ -290,13 +290,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>336</string>
+					<string>364</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>335</string>
+					<string>363</string>
 					<key>Timestamp</key>
-					<string>731348968.4036289</string>
+					<string>731417739.3009191</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -321,7 +321,7 @@
 				<key>trailing</key>
 				<string>        // перебираем карточки
         for card in cardViews {
-            // для каждой карточки генерируем случайные координаты
+            if !continueGame {
 </string>
 			</dict>
 			<key>type</key>

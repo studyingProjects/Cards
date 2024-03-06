@@ -10,6 +10,7 @@ import UIKit
 protocol MainScreenViewDelegate {
     func startNewGame(_ sender: UIButton)
     func goToSettings(_ sender: UIButton)
+    func continueGame(_ sender: UIButton)
 }
 
 class MainScreenController: UIViewController {
@@ -37,12 +38,17 @@ class MainScreenController: UIViewController {
 extension MainScreenController: MainScreenViewDelegate {
     
     func startNewGame(_ sender: UIButton) {
-        navigationController?.pushViewController(BoardGameController(), animated: true)
+        navigationController?.pushViewController(BoardGameController(continueGame: false), animated: true)
     }
     
     func goToSettings(_ sender: UIButton) {
         navigationController?.pushViewController(SettingsController(), animated: true)
     }
+    
+    func continueGame(_ sender: UIButton) {
+        navigationController?.pushViewController(BoardGameController(continueGame: true), animated: true)
+    }
+    
     
     
 }

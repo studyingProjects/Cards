@@ -52,6 +52,18 @@ class MainScreenView: UIView {
         
         return button
     }()
+    private lazy var continueButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 160, height: 50))
+        button.setTitle("Продолжить", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemGray4, for: .highlighted)
+        button.backgroundColor = .systemGray5
+        button.layer.cornerRadius = 10
+        
+        button.addTarget(self, action: #selector(continueGame(_:)), for: .touchUpInside)
+        
+        return button
+    }()
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,12 +79,12 @@ class MainScreenView: UIView {
         setupAppearance()
         addSubview(startGameButton)
         addSubview(settingsButton)
+        addSubview(continueButton)
     }
     
     private func setupAppearance() {
         backgroundColor = #colorLiteral(red: 0, green: 0.568627451, blue: 0.5764705882, alpha: 1)   
     }
-    
 
     // MARK: - Actions
     @objc func startNewGame(_ sender: UIButton) {
@@ -81,6 +93,10 @@ class MainScreenView: UIView {
     
     @objc func goToSettings(_ sender: UIButton) {
         delegate?.goToSettings(sender)
+    }
+    
+    @objc func continueGame(_ sender: UIButton) {
+        delegate?.continueGame(sender)
     }
     
 }
@@ -96,5 +112,9 @@ extension MainScreenView: MainScreenControllerDelegate {
         
         settingsButton.center.x = self.center.x
         settingsButton.frame.origin.y = startGameButton.frame.origin.y + startGameButton.frame.height + commonPadding
+        
+        continueButton.center.x = self.center.x
+        continueButton.frame.origin.y = settingsButton.frame.origin.y + settingsButton.frame.height + commonPadding
+        
     }
 }
